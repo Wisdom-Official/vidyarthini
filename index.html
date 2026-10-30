@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidyarthini Sammelanam | Wisdom Girls Kozhikode North</title>
+    
+    <!-- Fonts: Playfair Display for Serifs, Plus Jakarta Sans for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            DEFAULT: '#4a0a12',
+                            dark: '#33050b',
+                            light: '#61111b',
+                        },
+                        magenta: {
+                            DEFAULT: '#d4207f',
+                            hover: '#b5186b',
+                            light: '#fcebf4',
+                        },
+                        olive: {
+                            DEFAULT: '#5a6e2a',
+                            light: '#728b36',
+                        },
+                        forest: {
+                            DEFAULT: '#2f5028',
+                        },
+                        mustard: {
+                            DEFAULT: '#c9a227',
+                            light: '#e0b838',
+                        },
+                        cream: '#fdfbf7',
+                        blush: '#f9ecef',
+                        blushDark: '#f3d9e0',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -5px rgba(74, 10, 18, 0.08)',
+                        'glow': '0 0 25px rgba(212, 32, 127, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lenis Smooth Scroll CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fdfbf7;
+            color: #33050b;
+            overflow-x: hidden;
+        }
+
+        .bg-arch-pattern {
+            background-image: radial-gradient(circle at 50% 0%, rgba(243, 217, 224, 0.6) 0%, rgba(253, 251, 247, 0) 70%);
+        }
+
+        .decorative-arch {
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes floatMedium {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(-4deg); }
+        }
+        .animate-float-slow { animation: floatSlow 7s ease-in-out infinite; }
+        .animate-float-medium { animation: floatMedium 5s ease-in-out infinite; }
+
+        .glass-header {
+            background: rgba(253, 251, 247, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 32, 127, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(243, 217, 224, 0.8);
+        }
+    </style>
+</head>
+<body class="text-maroon antialiased selection:bg-magenta selection:text-white">
+
+    <!-- FLOATING DECORATIVE BACKGROUND PETALS -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <svg class="absolute top-20 left-[5%] w-8 h-8 opacity-30 text-magenta animate-float-slow" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C12 2 14.5 7 19 8.5C19 8.5 15 13 13.5 19C13.5 19 11 14 6.5 12.5C6.5 12.5 10.5 8 12 2Z"/>
+        </svg>
+        <svg class="absolute top-[45%] right-[4%] w-12 h-12 opacity-25 text-olive animate-float-medium" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 3C10 3 4 8 4 15C4 18.5 6.5 21 10 21C17 21 21 13 21 6C21 4.5 19.5 3 17 3ZM10 19C7.8 19 6 17.2 6 15C6 11 10 7 15 5C13 9 11 15 10 19Z"/>
+        </svg>
+        <svg class="absolute bottom-32 left-[8%] w-10 h-10 opacity-20 text-mustard animate-float-slow" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C12 2 15 8 20 10C20 10 15 15 13 21C13 21 10 14 5 12C5 12 10 7 12 2Z"/>
+        </svg>
+    </div>
+
+    <!-- 1. FIXED HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-header py-3.5 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group focus:outline-none rounded-lg p-1">
+                <img src="Wisdom_Girls.png" alt="Wisdom Girls Logo" class="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/160x60/d4207f/ffffff?text=Wisdom+Girls';">
+                <div class="h-6 w-[1.5px] bg-maroon/20"></div>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider text-maroon uppercase font-sans">Kozhikode North</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide text-maroon/90">
+                <a href="#about" class="hover:text-magenta transition-colors duration-200">About</a>
+                <a href="#themes" class="hover:text-magenta transition-colors duration-200">Themes</a>
+                <a href="#register-section" class="hover:text-magenta transition-colors duration-200 font-bold text-magenta">Register Now</a>
+                <a href="#details" class="hover:text-magenta transition-colors duration-200">Details</a>
+                <a href="#venue" class="hover:text-magenta transition-colors duration-200">Venue</a>
+                <a href="dashboard.html" class="text-maroon/70 hover:text-maroon text-xs border border-maroon/20 px-3 py-1 rounded-full"><i class="fa-solid fa-lock mr-1"></i> Admin</a>
+            </nav>
+
+            <!-- Right: Action CTA & Mobile Hamburger -->
+            <div class="flex items-center space-x-4">
+                <a href="#register-section" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-magenta to-maroon hover:shadow-glow hover:scale-[1.02] active:scale-95 transition-all duration-200">
+                    <i class="fa-solid fa-user-plus mr-2"></i> Register Now
+                </a>
+
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-maroon hover:text-magenta focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-cream/95 backdrop-blur-xl border-b border-blushDark shadow-xl py-6 px-6 transition-all duration-300">
+            <div class="flex flex-col space-y-4 text-center font-medium">
+                <a href="#about" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">About</a>
+                <a href="#themes" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">Themes</a>
+                <a href="#register-section" onclick="toggleMobileMenu()" class="py-2 text-magenta font-bold border-b border-blush/60">Register Delegate</a>
+                <a href="#details" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">Details</a>
+                <a href="#venue" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">Venue</a>
+                <a href="dashboard.html" onclick="toggleMobileMenu()" class="py-2 text-maroon/70 text-sm">Coordinator Portal</a>
+                <a href="#register-section" onclick="toggleMobileMenu()" class="w-full mt-2 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-magenta to-maroon shadow-md text-center block">
+                    Register Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-arch-pattern overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[92%] sm:w-[680px] md:w-[850px] h-[70vh] max-h-[650px] bg-gradient-to-b from-blush/80 via-blush/40 to-transparent decorative-arch border-t border-x border-magenta/10 pointer-events-none -z-10"></div>
+        <div class="absolute top-20 right-[-10%] w-[350px] h-[350px] bg-blushDark/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center z-10 flex flex-col items-center">
+            
+            <div id="hero-tagline" class="inline-flex items-center px-4 py-1.5 rounded-full bg-blush border border-magenta/20 text-magenta font-semibold text-xs sm:text-sm tracking-wider uppercase mb-6 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-magenta mr-2.5 animate-pulse"></span>
+                Studenthood Against Exploitation
+            </div>
+
+            <div id="hero-logo-wrapper" class="relative my-2 max-w-[280px] sm:max-w-[420px] md:max-w-[500px]">
+                <img src="Main logo.png" alt="Vidyarthini Sammelanam Event Logo" class="w-full h-auto drop-shadow-md mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x250/4a0a12/ffffff?text=Vidyarthini+Sammelanam';">
+            </div>
+
+            <!-- REGISTRATION BUTTON RIGHT UNDER THE LOGO -->
+            <div class="mt-6 mb-4">
+                <a href="#register-section" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base sm:text-lg font-bold text-white bg-gradient-to-r from-magenta via-maroon to-magenta bg-[length:200%_auto] hover:bg-right hover:shadow-glow hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl border border-magenta/30">
+                    <i class="fa-solid fa-pen-to-square mr-3 text-mustard text-xl"></i> Register Now
+                </a>
+            </div>
+
+            <p id="hero-sub" class="text-base sm:text-xl font-serif font-medium text-maroon/90 mt-2 max-w-2xl leading-relaxed">
+                Empowering Young Muslim Women with Knowledge, Identity, and Purpose.
+            </p>
+
+            <div id="hero-banner" class="mt-6 sm:mt-8 inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 px-6 py-3.5 rounded-2xl glass-card shadow-soft text-maroon">
+                <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
+                    <i class="fa-regular fa-calendar-days text-magenta text-lg"></i>
+                    <span>10 JAN 2027 &middot; SUNDAY</span>
+                </div>
+                <div class="hidden sm:block text-magenta/40">|</div>
+                <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
+                    <i class="fa-solid fa-location-dot text-magenta text-lg"></i>
+                    <span class="uppercase tracking-wide">NADAPURAM</span>
+                </div>
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <div class="mt-10 sm:mt-12 animate-bounce">
+                <a href="#register-section" aria-label="Scroll down to registration form" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-magenta/40 text-magenta hover:bg-magenta hover:text-white transition-all shadow-sm">
+                    <i class="fa-solid fa-chevron-down text-base"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. MAIN REGISTRATION SECTION -->
+    <section id="register-section" class="py-20 sm:py-28 relative bg-gradient-to-b from-cream via-blush/30 to-cream">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center max-w-2xl mx-auto mb-10 reveal-element">
+                <span class="text-magenta font-bold text-xs sm:text-sm uppercase tracking-widest bg-blush px-4 py-1.5 rounded-full border border-magenta/20">Delegate Portal</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-3 mb-3">Event Registration</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-magenta to-mustard mx-auto rounded-full mb-3"></div>
+                <p class="text-sm sm:text-base text-maroon/80">Fill in your information below to complete your registration for Vidyarthini Sammelanam.</p>
+            </div>
+
+            <!-- FORM CARD -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-blushDark relative">
+                
+                <form id="delegateForm" class="space-y-6">
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-name">
+                            Full Name <span class="text-magenta">*</span>
+                        </label>
+                        <input type="text" id="reg-name" required placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                    </div>
+
+                    <!-- Age & Phone Number Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-age">
+                                Age <span class="text-magenta">*</span>
+                            </label>
+                            <input type="number" id="reg-age" min="5" max="100" required placeholder="e.g. 18" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-phone">
+                                Phone Number (WhatsApp) <span class="text-magenta">*</span>
+                            </label>
+                            <input type="tel" id="reg-phone" required placeholder="10-digit mobile number" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Place & Current Education/Occupation Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-place">
+                                Place / Native Town <span class="text-magenta">*</span>
+                            </label>
+                            <input type="text" id="reg-place" required placeholder="Enter your place" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-education">
+                                Current Education / Occupation <span class="text-magenta">*</span>
+                            </label>
+                            <input type="text" id="reg-education" required placeholder="e.g. Plus Two, B.Sc Computer Science" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                        </div>
+                    </div>
+
+                    <!-- MANDALAM & UNIT SELECTORS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-maroon/10">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-mandalam">
+                                Select Zone / Mandalam <span class="text-magenta">*</span>
+                            </label>
+                            <select id="reg-mandalam" required onchange="handleZoneChange()" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all cursor-pointer">
+                                <option value="" disabled selected>-- Choose Mandalam --</option>
+                                <option value="BALUSSERRY">BALUSSERRY</option>
+                                <option value="NADAPURAM">NADAPURAM</option>
+                                <option value="POONUR">POONUR</option>
+                                <option value="KOYILANDY">KOYILANDY</option>
+                                <option value="PAYYOLI">PAYYOLI</option>
+                                <option value="PERAMBRA">PERAMBRA</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-unit">
+                                Select Unit <span class="text-magenta">*</span>
+                            </label>
+                            <select id="reg-unit" required disabled class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                <option value="" disabled selected>-- Select Zone First --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-magenta to-maroon shadow-lg hover:shadow-glow hover:scale-[1.01] active:scale-95 transition-all duration-200 mt-4 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Complete Registration</span>
+                    </button>
+                </form>
+
+                <!-- Feedback Message -->
+                <div id="registrationFeedback" class="hidden mt-6 p-4 rounded-2xl text-center text-sm font-medium transition-all"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SCROLL-DRIVEN IMAGE & EXPLANATION SECTION -->
+    <section id="about" class="py-24 sm:py-32 relative bg-cream">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-element">
+                <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Our Vision & Mission</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-4">Why This Conference Matters</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-magenta to-mustard mx-auto rounded-full"></div>
+                <p class="text-base sm:text-lg text-maroon/80 mt-4 font-normal">
+                    Discover how Vidyarthini Sammelanam creates a transformative space for student girls to reclaim their intellectual and moral agency.
+                </p>
+            </div>
+
+            <div class="space-y-28 sm:space-y-40">
+                <!-- CARD 1 -->
+                <div class="scroll-row flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                    <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
+                        <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-olive p-4">
+                            <img src="Sliding_image_1.png" alt="Knowledge Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/5a6e2a/ffffff?text=Knowledge+and+Pen';">
+                        </div>
+                    </div>
+                    <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-olive/15 text-olive mb-3">Pillar 01 &middot; Pursuit of Knowledge</span>
+                        <h3 class="text-2xl sm:text-3xl font-serif font-bold text-maroon mb-4">Intellectual Resilience & Truth</h3>
+                        <p class="text-sm sm:text-base text-maroon/80 leading-relaxed">
+                            Education is more than information; it is a shield against ideological exploitation. Vidyarthini Sammelanam encourages young women to seek authentic knowledge, question narrative manipulations, and use literacy as a catalyst for societal elevation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="scroll-row flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16">
+                    <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
+                        <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-maroon p-4">
+                            <img src="Sliding_image_2.png" alt="Identity Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/4a0a12/ffffff?text=Identity+and+Hijab';">
+                        </div>
+                    </div>
+                    <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-magenta/15 text-magenta mb-3">Pillar 02 &middot; Identity & Dignity</span>
+                        <h3 class="text-2xl sm:text-3xl font-serif font-bold text-maroon mb-4">Unapologetic Faith & Self-Worth</h3>
+                        <p class="text-sm sm:text-base text-maroon/80 leading-relaxed">
+                            In an era of commercialized standards, holding onto one's modesty and religious identity is a powerful expression of freedom. We provide a platform where Muslim student girls can embrace their identity with dignity and unwavering confidence.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="scroll-row flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                    <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
+                        <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-forest p-4">
+                            <img src="Sliding_image_3.png" alt="Time Management Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/2f5028/ffffff?text=Time+and+Purpose';">
+                        </div>
+                    </div>
+                    <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-forest/15 text-forest mb-3">Pillar 03 &middot; Time Management</span>
+                        <h3 class="text-2xl sm:text-3xl font-serif font-bold text-maroon mb-4">Value of Time & Conscious Living</h3>
+                        <p class="text-sm sm:text-base text-maroon/80 leading-relaxed">
+                            Youth is a limited season rich with potential. This conference equips students with actionable insights on time stewardship, helping them balance academic excellence, personal growth, and social responsibility effectively.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FOUR THEME PILLARS SECTION -->
+    <section id="themes" class="py-24 bg-blush/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Core Pillars</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-4">Themes of the Conference</h2>
+                <p class="text-base sm:text-lg text-maroon/80">Four foundational values anchoring our discussions and workshops.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <div class="reveal-element group p-8 rounded-3xl bg-olive text-white shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-serif font-bold mb-3">Knowledge</h3>
+                        <p class="text-white/90 text-sm leading-relaxed">Cultivating critical thinking, Islamic scholarship, and academic achievement.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-element group p-8 rounded-3xl bg-maroon text-white shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-serif font-bold mb-3">Identity</h3>
+                        <p class="text-white/90 text-sm leading-relaxed">Strengthening spiritual grounding and pride in modesty within student life.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-element group p-8 rounded-3xl bg-forest text-white shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0zM12 2v2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-serif font-bold mb-3">Time</h3>
+                        <p class="text-white/90 text-sm leading-relaxed">Mastering discipline, goal-setting, and purpose-driven living.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-element group p-8 rounded-3xl bg-mustard text-maroon-dark shadow-lg hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-maroon/10 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-maroon-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-serif font-bold mb-3">Family & Bonding</h3>
+                        <p class="text-maroon/90 text-sm leading-relaxed font-medium">Nurturing healthy family ties, emotional resilience, and peer networks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. EVENT DETAILS & COUNTDOWN -->
+    <section id="details" class="py-24 bg-cream relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal-element">
+                <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Mark Your Calendar</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-4">Event Overview</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-magenta to-mustard mx-auto rounded-full"></div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-soft border border-blushDark mb-16 reveal-element">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-maroon/10">
+                    <div class="flex flex-col items-center md:items-start pt-4 md:pt-0">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Date & Day</span>
+                        <p class="text-2xl font-serif font-bold text-maroon">Sunday</p>
+                        <p class="text-lg text-maroon/80 font-medium">10 January 2027</p>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start pt-6 md:pt-0 md:pl-8">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Location</span>
+                        <p class="text-2xl font-serif font-bold text-maroon">Nadapuram</p>
+                        <p class="text-lg text-maroon/80 font-medium">Kozhikode District, Kerala</p>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start pt-6 md:pt-0 md:pl-8">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Organiser</span>
+                        <p class="text-2xl font-serif font-bold text-maroon">Wisdom Girls</p>
+                        <p class="text-lg text-maroon/80 font-medium">Kozhikode North Zone</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="reveal-element text-center">
+                <h3 class="text-xl sm:text-2xl font-serif font-semibold text-maroon mb-8">Event Countdown</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                    <div class="bg-gradient-to-b from-blush to-cream p-5 rounded-2xl border border-magenta/20 shadow-sm">
+                        <span id="cd-days" class="block text-3xl sm:text-5xl font-serif font-bold text-maroon">00</span>
+                        <span class="text-xs uppercase font-semibold text-magenta tracking-wider mt-1 block">Days</span>
+                    </div>
+                    <div class="bg-gradient-to-b from-blush to-cream p-5 rounded-2xl border border-magenta/20 shadow-sm">
+                        <span id="cd-hours" class="block text-3xl sm:text-5xl font-serif font-bold text-maroon">00</span>
+                        <span class="text-xs uppercase font-semibold text-magenta tracking-wider mt-1 block">Hours</span>
+                    </div>
+                    <div class="bg-gradient-to-b from-blush to-cream p-5 rounded-2xl border border-magenta/20 shadow-sm">
+                        <span id="cd-minutes" class="block text-3xl sm:text-5xl font-serif font-bold text-maroon">00</span>
+                        <span class="text-xs uppercase font-semibold text-magenta tracking-wider mt-1 block">Minutes</span>
+                    </div>
+                    <div class="bg-gradient-to-b from-blush to-cream p-5 rounded-2xl border border-magenta/20 shadow-sm">
+                        <span id="cd-seconds" class="block text-3xl sm:text-5xl font-serif font-bold text-maroon">00</span>
+                        <span class="text-xs uppercase font-semibold text-magenta tracking-wider mt-1 block">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. VENUE SECTION -->
+    <section id="venue" class="py-24 bg-blush/30 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 reveal-element">
+                    <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Venue & Directions</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-6">Gathering at Nadapuram</h2>
+                    <p class="text-base text-maroon/80 leading-relaxed mb-6">
+                        Nadapuram is a historic town in Kozhikode district, well-connected by major roadways. The conference facility offers modern amenities, dedicated prayer areas, and an inspiring environment for all delegates.
+                    </p>
+                    <a href="https://maps.google.com/?q=Nadapuram+Kozhikode+Kerala" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold text-white bg-maroon hover:bg-magenta transition-all duration-300 shadow-md">
+                        <i class="fa-solid fa-diamond-turn-right mr-2.5 text-mustard"></i>
+                        View Location on Google Maps
+                    </a>
+                </div>
+
+                <div class="lg:col-span-7 reveal-element">
+                    <div class="relative rounded-3xl overflow-hidden glass-card p-4 shadow-xl border border-blushDark">
+                        <div class="w-full h-80 sm:h-96 rounded-2xl bg-gradient-to-br from-blushDark via-cream to-blush flex flex-col items-center justify-center text-center p-6 relative overflow-hidden">
+                            <div class="w-20 h-20 rounded-full bg-magenta/10 border-2 border-magenta flex items-center justify-center mb-4 animate-bounce">
+                                <i class="fa-solid fa-location-dot text-3xl text-magenta"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-maroon">Nadapuram Conference Center</h3>
+                            <p class="text-xs sm:text-sm text-maroon/70 mt-1 max-w-sm">
+                                Full address details and delegate hall mapping will be shared upon registration confirmation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-maroon text-white pt-16 pb-12 border-t-4 border-magenta">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between pb-12 border-b border-white/10 gap-8">
+                <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
+                    <img src="Wisdom Girls.png" alt="Wisdom Girls Logo" class="h-12 w-auto bg-white/90 p-2 rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/160x60/ffffff/4a0a12?text=Wisdom+Girls';">
+                    <div>
+                        <h4 class="text-xl font-serif font-bold tracking-wide">Wisdom Girls</h4>
+                        <p class="text-xs text-white/70 uppercase tracking-widest">Kozhikode North Zone</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-sm text-white/80 font-medium">
+                    <a href="#about" class="hover:text-magenta transition-colors">About</a>
+                    <a href="#themes" class="hover:text-magenta transition-colors">Themes</a>
+                    <a href="#register-section" class="hover:text-magenta transition-colors">Register</a>
+                    <a href="#details" class="hover:text-magenta transition-colors">Details</a>
+                    <a href="#venue" class="hover:text-magenta transition-colors">Venue</a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4 text-center">
+                <p>&copy; 2027 Wisdom Girls Kozhikode North. All rights reserved.</p>
+                <p class="italic font-serif text-white/80">"Studenthood against exploitation"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- FIREBASE MODULE & SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Provided Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxXaMYeF13ZMPL6PO2w_-pmFBuuEq-wJk",
+            authDomain: "vidyarthini-30d32.firebaseapp.com",
+            projectId: "vidyarthini-30d32",
+            storageBucket: "vidyarthini-30d32.firebasestorage.app",
+            messagingSenderId: "134772134999",
+            appId: "1:134772134999:web:d9eb598a9896d4afe4bf12"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // App Id context
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vidyarthini-30d32';
+
+        // Auth initialization
+        async function authenticateUser() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Auth Error:", err);
+            }
+        }
+        authenticateUser();
+
+        // ZONE & UNIT DIRECTORY
+        window.MANDALAM_DATA = {
+            "BALUSSERRY": ["PUTHOOR VATTAM", "BALUSSERI TOWN", "BALUSSERI", "ARAPPEEDIKA", "VATTOLI BAZAR", "NANMINDA 14", "POONATH", "KOORACHUND"],
+            "NADAPURAM": ["THUNERI", "NADAPURAM", "VANIMEL", "KALLAACCHI", "CHEEKKONNU", "THANNEER PANTHAL"],
+            "POONUR": ["THALAYAD", "THACHAMPOYIL", "VALLIYOTH", "EKAROOL", "POONOOR", "KEDAVOOR", "KOLIKKAL"],
+            "KOYILANDY": ["KATTIL PEEDIKA", "KAPPAD", "CHANGOOTUKAVU", "KOYLANDI", "KOLLAM", "MUDADI", "ARIKKULAM", "KAVUMVATTAM"],
+            "PAYYOLI": ["PAYYOLI", "THURAYUR", "THIKKODI", "NANDI", "KEEZHUR"],
+            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"]
+        };
+
+        window.handleZoneChange = function() {
+            const mandalamSelect = document.getElementById('reg-mandalam');
+            const unitSelect = document.getElementById('reg-unit');
+            const selectedZone = mandalamSelect.value;
+
+            unitSelect.innerHTML = '<option value="" disabled selected>-- Select Unit --</option>';
+
+            if (selectedZone && window.MANDALAM_DATA[selectedZone]) {
+                unitSelect.disabled = false;
+                window.MANDALAM_DATA[selectedZone].forEach(unit => {
+                    const opt = document.createElement('option');
+                    opt.value = unit;
+                    opt.textContent = unit;
+                    unitSelect.appendChild(opt);
+                });
+            } else {
+                unitSelect.disabled = true;
+            }
+        };
+
+        // Form Submit Handler
+        const delegateForm = document.getElementById('delegateForm');
+        const feedback = document.getElementById('registrationFeedback');
+        const submitBtn = document.getElementById('submitBtn');
+
+        delegateForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Saving Details...</span>';
+
+            const name = document.getElementById('reg-name').value.trim();
+            const age = parseInt(document.getElementById('reg-age').value);
+            const phone = document.getElementById('reg-phone').value.trim();
+            const place = document.getElementById('reg-place').value.trim();
+            const education = document.getElementById('reg-education').value.trim();
+            const mandalam = document.getElementById('reg-mandalam').value;
+            const unit = document.getElementById('reg-unit').value;
+
+            try {
+                if (!auth.currentUser) {
+                    await authenticateUser();
+                }
+
+                // Public Path as per RULE 1
+                const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+                
+                await addDoc(regCollection, {
+                    name,
+                    age,
+                    phone,
+                    place,
+                    education,
+                    mandalam,
+                    unit,
+                    registeredAt: serverTimestamp(),
+                    userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
+                });
+
+                feedback.className = "mt-6 p-4 rounded-2xl text-center text-sm font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-lg mr-2"></i> Registration Successful! Welcome, <strong>${name}</strong>. See you at Nadapuram!`;
+
+                delegateForm.reset();
+                document.getElementById('reg-unit').disabled = true;
+                document.getElementById('reg-unit').innerHTML = '<option value="" disabled selected>-- Select Zone First --</option>';
+
+            } catch (err) {
+                console.error("Firebase Add Error:", err);
+                feedback.className = "mt-6 p-4 rounded-2xl text-center text-sm font-semibold bg-rose-100 text-rose-800 border border-rose-300 block";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-exclamation text-lg mr-2"></i> Registration failed. Please check your internet connection and try again.`;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Complete Registration</span>';
+            }
+        });
+    </script>
+
+    <!-- UI Interaction Scripts -->
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0, 0);
+
+        window.addEventListener('load', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const scrollRows = document.querySelectorAll('.scroll-row');
+            scrollRows.forEach((row, idx) => {
+                const imgWrap = row.querySelector('.scroll-img-wrap');
+                const textCard = row.querySelector('.scroll-text-card');
+                const isEven = idx % 2 === 0;
+
+                const rowTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: row,
+                        start: 'top 85%',
+                        end: 'top 35%',
+                        scrub: 1.2,
+                    }
+                });
+
+                rowTl.fromTo(imgWrap, { x: isEven ? 100 : -100, rotate: isEven ? 8 : -8, opacity: 0.3 }, { x: 0, rotate: 0, opacity: 1, ease: 'power2.out' });
+                rowTl.fromTo(textCard, { y: 40, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out' }, '<');
+            });
+
+            const revealElements = document.querySelectorAll('.reveal-element');
+            revealElements.forEach((el) => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 88%',
+                        toggleActions: 'play none none reverse',
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Header Shrink
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2', 'shadow-md');
+                header.classList.remove('py-3.5');
+            } else {
+                header.classList.add('py-3.5');
+                header.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Countdown Timer
+        const eventDate = new Date('January 10, 2027 09:00:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').textContent = days < 10 ? '0' + days : days;
+                document.getElementById('cd-hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('cd-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('cd-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
