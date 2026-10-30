@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,11 +62,15 @@
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
 
     <style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden !important;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #fdfbf7;
             color: #33050b;
-            overflow-x: hidden;
         }
 
         .bg-arch-pattern {
@@ -105,7 +108,7 @@
         }
     </style>
 </head>
-<body class="text-maroon antialiased selection:bg-magenta selection:text-white">
+<body class="text-maroon antialiased selection:bg-magenta selection:text-white relative overflow-x-hidden">
 
     <!-- FLOATING DECORATIVE BACKGROUND PETALS -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
@@ -124,7 +127,7 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-header py-3.5 px-4 sm:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center space-x-3 group focus:outline-none rounded-lg p-1">
-                <img src="Wisdom_Girls.png" alt="Wisdom Girls Logo" class="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/160x60/d4207f/ffffff?text=Wisdom+Girls';">
+                <img src="Wisdom Girls.png" alt="Wisdom Girls Logo" class="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/160x60/d4207f/ffffff?text=Wisdom+Girls';">
                 <div class="h-6 w-[1.5px] bg-maroon/20"></div>
                 <span class="text-xs sm:text-sm font-semibold tracking-wider text-maroon uppercase font-sans">Kozhikode North</span>
             </a>
@@ -159,7 +162,7 @@
                 <a href="#register-section" onclick="toggleMobileMenu()" class="py-2 text-magenta font-bold border-b border-blush/60">Register Delegate</a>
                 <a href="#details" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">Details</a>
                 <a href="#venue" onclick="toggleMobileMenu()" class="py-2 text-maroon hover:text-magenta border-b border-blush/60">Venue</a>
-                <a href="dashboard.html" onclick="toggleMobileMenu()" class="py-2 text-maroon/70 text-sm">Coordinator Portal</a>
+                <!--a href="dashboard.html" onclick="toggleMobileMenu()" class="py-2 text-maroon/70 text-sm">Coordinator Portal</a-->
                 <a href="#register-section" onclick="toggleMobileMenu()" class="w-full mt-2 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-magenta to-maroon shadow-md text-center block">
                     Register Now
                 </a>
@@ -170,16 +173,16 @@
     <!-- 2. HERO SECTION -->
     <section class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-arch-pattern overflow-hidden">
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[92%] sm:w-[680px] md:w-[850px] h-[70vh] max-h-[650px] bg-gradient-to-b from-blush/80 via-blush/40 to-transparent decorative-arch border-t border-x border-magenta/10 pointer-events-none -z-10"></div>
-        <div class="absolute top-20 right-[-10%] w-[350px] h-[350px] bg-blushDark/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <div class="absolute top-20 right-0 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-blushDark/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
-        <div class="max-w-4xl mx-auto px-4 text-center z-10 flex flex-col items-center">
+        <div class="max-w-4xl mx-auto px-4 text-center z-10 flex flex-col items-center w-full">
             
-            <div id="hero-tagline" class="inline-flex items-center px-4 py-1.5 rounded-full bg-blush border border-magenta/20 text-magenta font-semibold text-xs sm:text-sm tracking-wider uppercase mb-6 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-magenta mr-2.5 animate-pulse"></span>
-                Studenthood Against Exploitation
+            <div id="hero-tagline" class="inline-flex items-center px-4 py-1.5 rounded-full bg-blush border border-magenta/20 text-magenta font-semibold text-xs sm:text-sm tracking-wider uppercase mb-6 shadow-sm max-w-full">
+                <span class="w-1 h-2 -magenta mr-0.5 shrink-0 "></span>
+                <span class="truncate">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ  </span>
             </div>
 
-            <div id="hero-logo-wrapper" class="relative my-2 max-w-[280px] sm:max-w-[420px] md:max-w-[500px]">
+            <div id="hero-logo-wrapper" class="relative my-2 max-w-[280px] sm:max-w-[420px] md:max-w-[500px] w-full">
                 <img src="Main logo.png" alt="Vidyarthini Sammelanam Event Logo" class="w-full h-auto drop-shadow-md mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x250/4a0a12/ffffff?text=Vidyarthini+Sammelanam';">
             </div>
 
@@ -194,7 +197,7 @@
                 Empowering Young Muslim Women with Knowledge, Identity, and Purpose.
             </p>
 
-            <div id="hero-banner" class="mt-6 sm:mt-8 inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 px-6 py-3.5 rounded-2xl glass-card shadow-soft text-maroon">
+            <div id="hero-banner" class="mt-6 sm:mt-8 inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 px-6 py-3.5 rounded-2xl glass-card shadow-soft text-maroon max-w-full">
                 <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
                     <i class="fa-regular fa-calendar-days text-magenta text-lg"></i>
                     <span>10 JAN 2027 &middot; SUNDAY</span>
@@ -216,7 +219,7 @@
     </section>
 
     <!-- 3. MAIN REGISTRATION SECTION -->
-    <section id="register-section" class="py-20 sm:py-28 relative bg-gradient-to-b from-cream via-blush/30 to-cream">
+    <section id="register-section" class="py-20 sm:py-28 relative bg-gradient-to-b from-cream via-blush/30 to-cream overflow-hidden">
         <div class="max-w-3xl mx-auto px-4 sm:px-6">
             
             <div class="text-center max-w-2xl mx-auto mb-10 reveal-element">
@@ -278,6 +281,7 @@
                             </label>
                             <select id="reg-mandalam" required onchange="handleZoneChange()" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all cursor-pointer">
                                 <option value="" disabled selected>-- Choose Mandalam --</option>
+                                <option value="VATAKARA">VATAKARA</option>
                                 <option value="BALUSSERRY">BALUSSERRY</option>
                                 <option value="NADAPURAM">NADAPURAM</option>
                                 <option value="POONUR">POONUR</option>
@@ -311,7 +315,7 @@
     </section>
 
     <!-- 4. SCROLL-DRIVEN IMAGE & EXPLANATION SECTION -->
-    <section id="about" class="py-24 sm:py-32 relative bg-cream">
+    <section id="about" class="py-24 sm:py-32 relative bg-cream overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-20 reveal-element">
                 <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Our Vision & Mission</span>
@@ -327,7 +331,7 @@
                 <div class="scroll-row flex flex-col md:flex-row items-center gap-8 md:gap-16">
                     <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
                         <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-olive p-4">
-                            <img src="Sliding_image_1.png" alt="Knowledge Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/5a6e2a/ffffff?text=Knowledge+and+Pen';">
+                            <img src="Sliding image 1.png" alt="Knowledge Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/5a6e2a/ffffff?text=Knowledge+and+Pen';">
                         </div>
                     </div>
                     <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
@@ -343,7 +347,7 @@
                 <div class="scroll-row flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16">
                     <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
                         <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-maroon p-4">
-                            <img src="Sliding_image_2.png" alt="Identity Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/4a0a12/ffffff?text=Identity+and+Hijab';">
+                            <img src="Sliding image 2.png" alt="Identity Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/4a0a12/ffffff?text=Identity+and+Hijab';">
                         </div>
                     </div>
                     <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
@@ -359,7 +363,7 @@
                 <div class="scroll-row flex flex-col md:flex-row items-center gap-8 md:gap-16">
                     <div class="scroll-img-wrap w-full md:w-1/2 flex justify-center">
                         <div class="relative max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-forest p-4">
-                            <img src="Sliding_image_3.png" alt="Time Management Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/2f5028/ffffff?text=Time+and+Purpose';">
+                            <img src="Sliding image 3.png" alt="Time Management Pillar" class="w-full h-auto object-contain rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/500x500/2f5028/ffffff?text=Time+and+Purpose';">
                         </div>
                     </div>
                     <div class="scroll-text-card w-full md:w-1/2 glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
@@ -375,7 +379,7 @@
     </section>
 
     <!-- 5. FOUR THEME PILLARS SECTION -->
-    <section id="themes" class="py-24 bg-blush/40 relative">
+    <section id="themes" class="py-24 bg-blush/40 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
                 <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Core Pillars</span>
@@ -436,7 +440,7 @@
     </section>
 
     <!-- 6. EVENT DETAILS & COUNTDOWN -->
-    <section id="details" class="py-24 bg-cream relative">
+    <section id="details" class="py-24 bg-cream relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 reveal-element">
                 <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Mark Your Calendar</span>
@@ -490,7 +494,7 @@
     </section>
 
     <!-- 7. VENUE SECTION -->
-    <section id="venue" class="py-24 bg-blush/30 relative">
+    <section id="venue" class="py-24 bg-blush/30 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5 reveal-element">
@@ -523,7 +527,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-maroon text-white pt-16 pb-12 border-t-4 border-magenta">
+    <footer class="bg-maroon text-white pt-16 pb-12 border-t-4 border-magenta overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between pb-12 border-b border-white/10 gap-8">
                 <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
@@ -594,6 +598,7 @@
 
         // ZONE & UNIT DIRECTORY
         window.MANDALAM_DATA = {
+            "VATAKARA": ["VATAKARA", "MANIYOOR", "ORKATTERI", "AZHIYUR"],
             "BALUSSERRY": ["PUTHOOR VATTAM", "BALUSSERI TOWN", "BALUSSERI", "ARAPPEEDIKA", "VATTOLI BAZAR", "NANMINDA 14", "POONATH", "KOORACHUND"],
             "NADAPURAM": ["THUNERI", "NADAPURAM", "VANIMEL", "KALLAACCHI", "CHEEKKONNU", "THANNEER PANTHAL"],
             "POONUR": ["THALAYAD", "THACHAMPOYIL", "VALLIYOTH", "EKAROOL", "POONOOR", "KEDAVOOR", "KOLIKKAL"],
@@ -662,7 +667,7 @@
                 });
 
                 feedback.className = "mt-6 p-4 rounded-2xl text-center text-sm font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-lg mr-2"></i> Registration Successful! Welcome, <strong>${name}</strong>. See you at Nadapuram!`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-lg mr-2"></i> Registration Successful! Welcome, <strong>${name}</strong>. See you at Nadapuram ! إن شاء الله`;
 
                 delegateForm.reset();
                 document.getElementById('reg-unit').disabled = true;
@@ -715,7 +720,7 @@
                     }
                 });
 
-                rowTl.fromTo(imgWrap, { x: isEven ? 100 : -100, rotate: isEven ? 8 : -8, opacity: 0.3 }, { x: 0, rotate: 0, opacity: 1, ease: 'power2.out' });
+                rowTl.fromTo(imgWrap, { x: isEven ? 50 : -50, rotate: isEven ? 4 : -4, opacity: 0.3 }, { x: 0, rotate: 0, opacity: 1, ease: 'power2.out' });
                 rowTl.fromTo(textCard, { y: 40, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out' }, '<');
             });
 
