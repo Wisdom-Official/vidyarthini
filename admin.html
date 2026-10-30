@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Dashboard | Vidyarthini Sammelanam</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: { DEFAULT: '#4a0a12', dark: '#33050b' },
+                        magenta: { DEFAULT: '#d4207f', light: '#fcebf4' },
+                        cream: '#fdfbf7',
+                        blush: '#f9ecef',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- XLSX Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="bg-cream text-maroon font-[Plus_Jakarta_Sans] min-h-screen">
+
+    <!-- PASSWORD AUTH MODAL OVERLAY -->
+    <div id="loginOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-maroon/80 backdrop-blur-md">
+        <div class="bg-white max-w-md w-full rounded-3xl p-8 shadow-2xl border border-blush/80 text-center">
+            <div class="w-16 h-16 rounded-full bg-magenta/10 border border-magenta text-magenta flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h2 class="text-2xl font-bold font-[Playfair_Display] text-maroon">Coordinator Access</h2>
+            <p class="text-xs text-maroon/70 mt-1 mb-6">Enter password to access registration analytics & export functions.</p>
+
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <input type="password" id="passInput" required placeholder="Enter password (കൺട്രോളർ)" class="w-full px-4 py-3 rounded-xl border border-maroon/20 text-center text-maroon font-medium focus:ring-2 focus:ring-magenta focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-magenta hover:bg-magenta/90 text-white font-semibold text-sm shadow-md transition-all">
+                    Unlock Dashboard
+                </button>
+            </form>
+            <p id="loginError" class="hidden text-xs text-red-600 font-semibold mt-3">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- DASHBOARD CONTAINER -->
+    <div id="dashboardContent" class="hidden min-h-screen pb-16">
+        
+        <!-- HEADER -->
+        <header class="bg-maroon text-white py-6 px-6 sm:px-12 shadow-lg border-b-4 border-magenta">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <img src="Wisdom_Girls.png" alt="Wisdom Girls" class="h-10 bg-white/90 p-1 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/120x40/ffffff/4a0a12?text=Wisdom+Girls';">
+                    <div>
+                        <h1 class="text-xl font-bold font-[Playfair_Display]">Vidyarthini Sammelanam</h1>
+                        <p class="text-xs text-white/70 uppercase tracking-widest">Zone & Unit Analytics Portal</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-xs text-white/80 hover:text-white border border-white/20 px-3 py-1.5 rounded-full"><i class="fa-solid fa-globe mr-1"></i> Public Site</a>
+                    <button onclick="lockDashboard()" class="text-xs bg-magenta/30 hover:bg-magenta text-white border border-magenta/40 px-3 py-1.5 rounded-full"><i class="fa-solid fa-lock mr-1"></i> Lock Portal</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN ANALYTICS -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
+            
+            <!-- OVERVIEW STATS -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-3xl border border-blush shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold uppercase text-maroon/60">Total Registered</span>
+                        <p id="statTotal" class="text-4xl font-bold font-[Playfair_Display] text-maroon mt-1">0</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-magenta/10 text-magenta flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl border border-blush shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold uppercase text-maroon/60">Active Zones</span>
+                        <p class="text-4xl font-bold font-[Playfair_Display] text-maroon mt-1">6</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-olive/10 text-olive flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl border border-blush shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold uppercase text-maroon/60">Total Units</span>
+                        <p class="text-4xl font-bold font-[Playfair_Display] text-maroon mt-1">39</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-mustard/10 text-mustard flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-building-flag"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTROLS & EXPORT BAR -->
+            <div class="bg-white p-6 rounded-3xl border border-blush shadow-sm mb-8">
+                <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+                    
+                    <!-- Filters -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow max-w-2xl">
+                        <div>
+                            <label class="block text-xs font-semibold text-maroon/70 mb-1">Filter by Zone / Mandalam</label>
+                            <select id="dashMandalamFilter" onchange="filterDashboardData()" class="w-full px-4 py-2.5 rounded-xl border border-blush bg-cream text-maroon text-sm font-medium focus:ring-2 focus:ring-magenta focus:outline-none">
+                                <option value="ALL">All Mandalams (6 Zones)</option>
+                                <option value="BALUSSERRY">BALUSSERRY</option>
+                                <option value="NADAPURAM">NADAPURAM</option>
+                                <option value="POONUR">POONUR</option>
+                                <option value="KOYILANDY">KOYILANDY</option>
+                                <option value="PAYYOLI">PAYYOLI</option>
+                                <option value="PERAMBRA">PERAMBRA</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-maroon/70 mb-1">Filter by Unit</label>
+                            <select id="dashUnitFilter" onchange="filterDashboardData()" disabled class="w-full px-4 py-2.5 rounded-xl border border-blush bg-cream text-maroon text-sm font-medium focus:ring-2 focus:ring-magenta focus:outline-none disabled:bg-gray-100">
+                                <option value="ALL">All Units</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- EXPORT BUTTONS -->
+                    <div class="flex items-center space-x-3 pt-2 lg:pt-0">
+                        <button onclick="exportToExcel('filtered')" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center shadow-md transition-all">
+                            <i class="fa-solid fa-file-excel text-base mr-2"></i> Download Filtered Excel
+                        </button>
+                        <button onclick="exportToExcel('all')" class="px-5 py-2.5 rounded-xl bg-maroon hover:bg-magenta text-white text-xs font-bold flex items-center shadow-md transition-all">
+                            <i class="fa-solid fa-download text-base mr-2"></i> Export All Mandalams
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MANDALAM BREAKDOWN CARDS -->
+            <div id="mandalamGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Dynamically Populated -->
+            </div>
+
+            <!-- DATA TABLE -->
+            <div class="bg-white rounded-3xl border border-blush shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-blush flex items-center justify-between">
+                    <div>
+                        <h3 class="font-bold font-[Playfair_Display] text-lg text-maroon">Delegate Registration List</h3>
+                        <p id="listCountLabel" class="text-xs text-maroon/60">Showing 0 entries</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-blush/50 text-maroon font-semibold uppercase text-xs">
+                            <tr>
+                                <th class="p-4">#</th>
+                                <th class="p-4">Name</th>
+                                <th class="p-4">Age</th>
+                                <th class="p-4">Phone</th>
+                                <th class="p-4">Place</th>
+                                <th class="p-4">Education/Work</th>
+                                <th class="p-4">Zone</th>
+                                <th class="p-4">Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsTableBody" class="divide-y divide-blush/60 text-maroon/90 font-medium">
+                            <tr>
+                                <td colspan="8" class="p-8 text-center text-maroon/50">Loading registrations...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- FIREBASE MODULE & SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxXaMYeF13ZMPL6PO2w_-pmFBuuEq-wJk",
+            authDomain: "vidyarthini-30d32.firebaseapp.com",
+            projectId: "vidyarthini-30d32",
+            storageBucket: "vidyarthini-30d32.firebasestorage.app",
+            messagingSenderId: "134772134999",
+            appId: "1:134772134999:web:d9eb598a9896d4afe4bf12"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vidyarthini-30d32';
+
+        window.MANDALAM_DATA = {
+            "BALUSSERRY": ["PUTHOOR VATTAM", "BALUSSERI TOWN", "BALUSSERI", "ARAPPEEDIKA", "VATTOLI BAZAR", "NANMINDA 14", "POONATH", "KOORACHUND"],
+            "NADAPURAM": ["THUNERI", "NADAPURAM", "VANIMEL", "KALLAACCHI", "CHEEKKONNU", "THANNEER PANTHAL"],
+            "POONUR": ["THALAYAD", "THACHAMPOYIL", "VALLIYOTH", "EKAROOL", "POONOOR", "KEDAVOOR", "KOLIKKAL"],
+            "KOYILANDY": ["KATTIL PEEDIKA", "KAPPAD", "CHANGOOTUKAVU", "KOYLANDI", "KOLLAM", "MUDADI", "ARIKKULAM", "KAVUMVATTAM"],
+            "PAYYOLI": ["PAYYOLI", "THURAYUR", "THIKKODI", "NANDI", "KEEZHUR"],
+            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"]
+        };
+
+        let rawRegistrations = [];
+
+        async function initAuthAndData() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Listen to registrations
+                const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+                onSnapshot(regCollection, (snapshot) => {
+                    rawRegistrations = [];
+                    snapshot.forEach(doc => {
+                        rawRegistrations.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderDashboard();
+                }, (error) => {
+                    console.error("Firestore Listen Error:", error);
+                });
+
+            } catch (err) {
+                console.error("Auth Exception:", err);
+            }
+        }
+
+        initAuthAndData();
+
+        window.renderDashboard = function() {
+            document.getElementById('statTotal').innerText = rawRegistrations.length;
+            renderMandalamCards();
+            filterDashboardData();
+        };
+
+        function renderMandalamCards() {
+            const grid = document.getElementById('mandalamGrid');
+            grid.innerHTML = '';
+
+            Object.keys(window.MANDALAM_DATA).forEach(zone => {
+                const zoneRegs = rawRegistrations.filter(r => r.mandalam === zone);
+                
+                let unitItemsHtml = '';
+                window.MANDALAM_DATA[zone].forEach(u => {
+                    const count = zoneRegs.filter(r => r.unit === u).length;
+                    unitItemsHtml += `
+                        <div class="flex items-center justify-between text-xs py-1 border-b border-blush/40 last:border-0">
+                            <span class="text-maroon/80 font-medium">${u}</span>
+                            <span class="font-bold px-2 py-0.5 rounded-full bg-magenta/10 text-magenta">${count}</span>
+                        </div>
+                    `;
+                });
+
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-blush shadow-sm flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold font-[Playfair_Display] text-lg text-maroon">${zone}</h4>
+                            <span class="text-xs font-bold px-3 py-1 bg-maroon text-white rounded-full">${zoneRegs.length} Regs</span>
+                        </div>
+                        <div class="mt-2 max-h-40 overflow-y-auto pr-1">
+                            ${unitItemsHtml}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.filterDashboardData = function() {
+            const zone = document.getElementById('dashMandalamFilter').value;
+            const unitSelect = document.getElementById('dashUnitFilter');
+
+            if (zone !== 'ALL' && window.MANDALAM_DATA[zone]) {
+                unitSelect.disabled = false;
+                const currentUnit = unitSelect.value;
+                unitSelect.innerHTML = '<option value="ALL">All Units in ' + zone + '</option>';
+                window.MANDALAM_DATA[zone].forEach(u => {
+                    const opt = document.createElement('option');
+                    opt.value = u;
+                    opt.textContent = u;
+                    unitSelect.appendChild(opt);
+                });
+                if (window.MANDALAM_DATA[zone].includes(currentUnit)) {
+                    unitSelect.value = currentUnit;
+                }
+            } else {
+                unitSelect.disabled = true;
+                unitSelect.innerHTML = '<option value="ALL">All Units</option>';
+            }
+
+            const selectedUnit = unitSelect.value;
+            let filtered = [...rawRegistrations];
+
+            if (zone !== 'ALL') {
+                filtered = filtered.filter(r => r.mandalam === zone);
+            }
+
+            if (selectedUnit !== 'ALL' && !unitSelect.disabled) {
+                filtered = filtered.filter(r => r.unit === selectedUnit);
+            }
+
+            window.currentFilteredData = filtered;
+
+            // Render Table
+            const tbody = document.getElementById('registrationsTableBody');
+            document.getElementById('listCountLabel').innerText = `Showing ${filtered.length} entries`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-maroon/50">No registrations found matching the selected filter.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = '';
+            filtered.forEach((r, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-blush/20 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-maroon/60">${idx + 1}</td>
+                    <td class="p-4 font-bold text-maroon">${r.name || '-'}</td>
+                    <td class="p-4">${r.age || '-'}</td>
+                    <td class="p-4 font-mono">${r.phone || '-'}</td>
+                    <td class="p-4">${r.place || '-'}</td>
+                    <td class="p-4">${r.education || '-'}</td>
+                    <td class="p-4"><span class="px-2.5 py-1 rounded-md bg-maroon/10 text-maroon text-xs font-bold">${r.mandalam || '-'}</span></td>
+                    <td class="p-4"><span class="px-2.5 py-1 rounded-md bg-magenta/10 text-magenta text-xs font-bold">${r.unit || '-'}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        };
+
+        window.exportToExcel = function(mode) {
+            const dataToExport = mode === 'filtered' ? (window.currentFilteredData || []) : rawRegistrations;
+
+            if (dataToExport.length === 0) {
+                alert("No data available to export.");
+                return;
+            }
+
+            const excelData = dataToExport.map((r, idx) => ({
+                "SL No": idx + 1,
+                "Full Name": r.name || "",
+                "Age": r.age || "",
+                "Phone Number": r.phone || "",
+                "Place": r.place || "",
+                "Education / Work": r.education || "",
+                "Zone / Mandalam": r.mandalam || "",
+                "Unit": r.unit || ""
+            }));
+
+            const worksheet = XLSX.utils.json_to_sheet(excelData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
+
+            const zone = document.getElementById('dashMandalamFilter').value;
+            const fileName = mode === 'filtered' && zone !== 'ALL' ? `Vidyarthini_Registrations_${zone}.xlsx` : `Vidyarthini_Registrations_All.xlsx`;
+
+            XLSX.writeFile(workbook, fileName);
+        };
+    </script>
+
+    <!-- AUTHENTICATION PASS CODE SCRIPT -->
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const passInput = document.getElementById('passInput');
+        const loginOverlay = document.getElementById('loginOverlay');
+        const dashboardContent = document.getElementById('dashboardContent');
+        const loginError = document.getElementById('loginError');
+
+        // Target Password: "കൺട്രോളർ" or "controller"
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = passInput.value.trim();
+            if (pass === '123456' || pass.toLowerCase() === 'controller') {
+                loginOverlay.classList.add('hidden');
+                dashboardContent.classList.remove('hidden');
+                loginError.classList.add('hidden');
+                if (window.renderDashboard) window.renderDashboard();
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        function lockDashboard() {
+            dashboardContent.classList.add('hidden');
+            loginOverlay.classList.remove('hidden');
+            passInput.value = '';
+        }
+    </script>
+</body>
+</html>
+```
