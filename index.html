@@ -274,6 +274,14 @@
                         </div>
                     </div>
 
+                    <!-- School / Campus Name -->
+                    <div>
+                        <label class="block text-xs sm:text-sm font-semibold text-maroon mb-1.5" for="reg-campus">
+                            School / College / Campus Name <span class="text-magenta">*</span>
+                        </label>
+                        <input type="text" id="reg-campus" required placeholder="Enter your school or campus name" class="w-full px-4 py-3 rounded-xl border border-blushDark bg-white text-maroon text-sm focus:outline-none focus:ring-2 focus:ring-magenta transition-all">
+                    </div>
+
                     <!-- MANDALAM & UNIT SELECTORS -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-maroon/10">
                         <div>
@@ -645,6 +653,7 @@
             const phone = document.getElementById('reg-phone').value.trim();
             const place = document.getElementById('reg-place').value.trim();
             const education = document.getElementById('reg-education').value.trim();
+            const campus = document.getElementById('reg-campus').value.trim();
             const mandalam = document.getElementById('reg-mandalam').value;
             const unit = document.getElementById('reg-unit').value;
 
@@ -662,6 +671,7 @@
                     phone,
                     place,
                     education,
+                    campus,
                     mandalam,
                     unit,
                     registeredAt: serverTimestamp(),
