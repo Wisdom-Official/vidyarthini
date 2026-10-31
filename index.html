@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
@@ -200,7 +201,7 @@
             <div id="hero-banner" class="mt-6 sm:mt-8 inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 px-6 py-3.5 rounded-2xl glass-card shadow-soft text-maroon max-w-full">
                 <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
                     <i class="fa-regular fa-calendar-days text-magenta text-lg"></i>
-                    <span>10 JAN 2027 &middot; SUNDAY</span>
+                    <span>24 DEC 2026 &middot; THURSDAY</span>
                 </div>
                 <div class="hidden sm:block text-magenta/40">|</div>
                 <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
@@ -309,7 +310,7 @@
                 </form>
 
                 <!-- Feedback Message -->
-                <div id="registrationFeedback" class="hidden mt-6 p-4 rounded-2xl text-center text-sm font-medium transition-all"></div>
+                <div id="registrationFeedback" class="hidden mt-6 p-6 rounded-2xl text-center text-sm font-medium transition-all"></div>
             </div>
         </div>
     </section>
@@ -452,8 +453,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-maroon/10">
                     <div class="flex flex-col items-center md:items-start pt-4 md:pt-0">
                         <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Date & Day</span>
-                        <p class="text-2xl font-serif font-bold text-maroon">Sunday</p>
-                        <p class="text-lg text-maroon/80 font-medium">10 January 2027</p>
+                        <p class="text-2xl font-serif font-bold text-maroon">Thursday</p>
+                        <p class="text-lg text-maroon/80 font-medium">24 December 2026</p>
                     </div>
                     <div class="flex flex-col items-center md:items-start pt-6 md:pt-0 md:pl-8">
                         <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Location</span>
@@ -548,7 +549,7 @@
             </div>
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4 text-center">
-                <p>&copy; 2027 Wisdom Girls Kozhikode North. All rights reserved.</p>
+                <p>&copy; 2026 Wisdom Girls Kozhikode North. All rights reserved.</p>
                 <p class="italic font-serif text-white/80">"Studenthood against exploitation"</p>
             </div>
         </div>
@@ -631,6 +632,7 @@
         const delegateForm = document.getElementById('delegateForm');
         const feedback = document.getElementById('registrationFeedback');
         const submitBtn = document.getElementById('submitBtn');
+        const whatsappGroupUrl = "https://chat.whatsapp.com/FBYB7QTXckk71WzjfNas1G?s=cl&p=a&mlu=4&ilr=4&iam=2";
 
         delegateForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -666,8 +668,29 @@
                     userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
                 });
 
-                feedback.className = "mt-6 p-4 rounded-2xl text-center text-sm font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-lg mr-2"></i> Registration Successful! Welcome, <strong>${name}</strong>. See you at Nadapuram ! إن شاء الله`;
+                feedback.className = "mt-6 p-6 rounded-2xl text-center text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-300 block shadow-sm";
+                feedback.innerHTML = `
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-3 text-2xl">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h4 class="text-xl font-bold font-serif mb-1 text-emerald-950">Registration Successful!</h4>
+                        <p class="text-emerald-800 text-sm mb-4">Welcome, <strong>${name}</strong>. See you at Nadapuram! إن شاء الله</p>
+                        
+                        <div class="w-full pt-4 mt-2 border-t border-emerald-200/80 flex flex-col items-center">
+                            <p class="font-bold text-emerald-900 text-base mb-2">ഏറ്റവും പുതിയ വിവരങ്ങൾ അറിയാൻ WhatsApp ഗ്രൂപ്പിൽ ജോയിൻ ചെയ്യുക:</p>
+                            
+                            <a href="${whatsappGroupUrl}" target="_blank" rel="noopener noreferrer" class="my-3 inline-flex items-center justify-center px-6 py-3.5 rounded-full text-base font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-md transition-all duration-200 shadow">
+                                <i class="fa-brands fa-whatsapp text-2xl mr-2.5"></i> Join WhatsApp Group
+                            </a>
+
+                            <div class="mt-4 p-3 bg-white rounded-2xl border border-emerald-200 shadow-sm flex flex-col items-center max-w-[240px]">
+                                <img src="QR code.jpg" alt="WhatsApp Group QR Code" class="w-48 h-48 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/200x200/25D366/ffffff?text=WhatsApp+QR';">
+                                <span class="text-xs text-gray-500 mt-2 font-medium">Scan QR to Join</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
 
                 delegateForm.reset();
                 document.getElementById('reg-unit').disabled = true;
@@ -768,7 +791,7 @@
         }
 
         // Countdown Timer
-        const eventDate = new Date('January 10, 2027 09:00:00').getTime();
+        const eventDate = new Date('December 24, 2026 09:00:00').getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const difference = eventDate - now;
