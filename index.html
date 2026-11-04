@@ -614,7 +614,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Provided Firebase Configuration
         const firebaseConfig = {
@@ -632,6 +632,9 @@
 
         // App Id context
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'vidyarthini-30d32';
+
+        // വാട്സ്ആപ്പ് വഴി ഓട്ടോ-സേവ് ചെയ്യപ്പെട്ട ഡോക്യുമെന്റിന്റെ ID ട്രാക്ക് ചെയ്യാൻ Variable
+        let createdDocId = sessionStorage.getItem('createdDocId') || null;
 
         // Auth initialization
         async function authenticateUser() {
@@ -682,11 +685,11 @@
         window.handleWhatsAppClick = async function() {
             sessionStorage.setItem('hasClickedWhatsAppGroup', 'true');
             
-            // ഓട്ടോ-സേവ് പ്രവർത്തനം: ഉപയോക്താവ് ഫോമിൽ പേരും ഫോൺ നമ്പറും ടൈപ്പ് ചെയ്തിട്ടുണ്ടെങ്കിൽ ബാക്ക്ഗ്രൗണ്ടിൽ ഫയർബേസിലേക്ക് സൂക്ഷിക്കുന്നു
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
             
-            if (name !== '' && phone !== '') {
+            // ഫോമിൽ പേരും ഫോണും ഉണ്ടെങ്കിൽ തത്സമയം ബാക്ക്ഗ്രൗണ്ടിൽ ഫയർബേസിലേക്ക് സൂക്ഷിക്കുന്നു
+            if (name !== '' && phone !== '' && !createdDocId) {
                 try {
                     if (!auth.currentUser) {
                         await authenticateUser();
@@ -694,7 +697,7 @@
 
                     const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
                     
-                    await addDoc(regCollection, {
+                    const newDoc = await addDoc(regCollection, {
                         name: name,
                         age: parseInt(document.getElementById('reg-age').value) || 0,
                         phone: phone,
@@ -704,11 +707,15 @@
                         mandalam: document.getElementById('reg-mandalam').value || '',
                         unit: document.getElementById('reg-unit').value || '',
                         whatsappJoined: true,
-                        autoSavedFromWhatsApp: true, // വാട്സ്ആപ്പ് ബട്ടൺ വഴി സ്വയം സേവ് ചെയ്യപ്പെട്ടതാണെന്ന് തിരിച്ചറിയാൻ
+                        autoSavedFromWhatsApp: true,
                         registeredAt: serverTimestamp(),
                         userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
                     });
-                    console.log("Data auto-saved on WhatsApp click!");
+
+                    // ക്രിയേറ്റ് ചെയ്‌ത Doc ID സേവ് ആക്കിവെക്കുക
+                    createdDocId = newDoc.id;
+                    sessionStorage.setItem('createdDocId', createdDocId);
+                    console.log("Data auto-saved on WhatsApp click with Doc ID:", createdDocId);
                 } catch (err) {
                     console.error("Auto-save error:", err);
                 }
@@ -765,9 +772,7 @@
                     await authenticateUser();
                 }
 
-                const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
-                
-                await addDoc(regCollection, {
+                const payload = {
                     name,
                     age,
                     phone,
@@ -777,12 +782,22 @@
                     mandalam,
                     unit,
                     whatsappJoined: true,
-                    autoSavedFromWhatsApp: false, // ബട്ടൺ വഴി പൂർണ്ണമായി സമർപ്പിച്ചത്
+                    autoSavedFromWhatsApp: false, // സമർപ്പണം പൂർത്തിയായി
                     registeredAt: serverTimestamp(),
                     userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
-                });
+                };
 
-                // Professional Text-only confirmation upon successful submission
+                // നേരെത്തെ വാട്സ്ആപ്പ് അമർത്തിയപ്പോൾ ആ ഡാറ്റ സേവ് ആയിരുന്നെങ്കിൽ രണ്ടാമതൊരു എൻട്രി ഇല്ലാതെ അതിലേക്ക് Update ചെയ്യുന്നു.
+                if (createdDocId) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'registrations', createdDocId);
+                    await setDoc(docRef, payload, { merge: true });
+                } else {
+                    // അഥവാ ഓട്ടോ-സേവ് ആയിട്ടില്ലെങ്കിൽ പുതിയ എൻട്രിയായി സേവ് ചെയ്യും
+                    const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+                    await addDoc(regCollection, payload);
+                }
+
+                // Text-only confirmation message
                 feedback.className = "mt-6 p-8 rounded-2xl text-center font-medium bg-emerald-50 text-emerald-950 border border-emerald-300 block shadow-sm";
                 feedback.innerHTML = `
                     <div class="flex flex-col items-center">
@@ -800,6 +815,8 @@
                 `;
 
                 delegateForm.reset();
+                createdDocId = null;
+                sessionStorage.removeItem('createdDocId');
                 sessionStorage.removeItem('hasClickedWhatsAppGroup');
                 document.getElementById('joinedConfirmCheckbox').disabled = true;
                 document.getElementById('clickStatusText').className = "text-xs font-semibold text-rose-600";
