@@ -678,9 +678,42 @@
             }
         };
 
-        // WHATSAPP GROUP CLICK & VERIFICATION LOGIC
-        window.handleWhatsAppClick = function() {
+        // WHATSAPP GROUP CLICK & VERIFICATION + AUTO-SAVE LOGIC
+        window.handleWhatsAppClick = async function() {
             sessionStorage.setItem('hasClickedWhatsAppGroup', 'true');
+            
+            // ഓട്ടോ-സേവ് പ്രവർത്തനം: ഉപയോക്താവ് ഫോമിൽ പേരും ഫോൺ നമ്പറും ടൈപ്പ് ചെയ്തിട്ടുണ്ടെങ്കിൽ ബാക്ക്ഗ്രൗണ്ടിൽ ഫയർബേസിലേക്ക് സൂക്ഷിക്കുന്നു
+            const name = document.getElementById('reg-name').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            
+            if (name !== '' && phone !== '') {
+                try {
+                    if (!auth.currentUser) {
+                        await authenticateUser();
+                    }
+
+                    const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+                    
+                    await addDoc(regCollection, {
+                        name: name,
+                        age: parseInt(document.getElementById('reg-age').value) || 0,
+                        phone: phone,
+                        place: document.getElementById('reg-place').value.trim(),
+                        education: document.getElementById('reg-education').value.trim(),
+                        campus: document.getElementById('reg-campus').value.trim(),
+                        mandalam: document.getElementById('reg-mandalam').value || '',
+                        unit: document.getElementById('reg-unit').value || '',
+                        whatsappJoined: true,
+                        autoSavedFromWhatsApp: true, // വാട്സ്ആപ്പ് ബട്ടൺ വഴി സ്വയം സേവ് ചെയ്യപ്പെട്ടതാണെന്ന് തിരിച്ചറിയാൻ
+                        registeredAt: serverTimestamp(),
+                        userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
+                    });
+                    console.log("Data auto-saved on WhatsApp click!");
+                } catch (err) {
+                    console.error("Auto-save error:", err);
+                }
+            }
+
             enableCheckbox();
         };
 
@@ -744,6 +777,7 @@
                     mandalam,
                     unit,
                     whatsappJoined: true,
+                    autoSavedFromWhatsApp: false, // ബട്ടൺ വഴി പൂർണ്ണമായി സമർപ്പിച്ചത്
                     registeredAt: serverTimestamp(),
                     userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
                 });
