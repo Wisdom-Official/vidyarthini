@@ -209,7 +209,7 @@
                 <div class="hidden sm:block text-magenta/40">|</div>
                 <div class="flex items-center space-x-2 font-semibold text-sm sm:text-base">
                     <i class="fa-solid fa-location-dot text-magenta text-lg"></i>
-                    <span class="uppercase tracking-wide">NADAPURAM</span>
+                    <span class="uppercase tracking-wide">KUTTIYADI</span>
                 </div>
             </div>
 
@@ -307,6 +307,7 @@
                                 <option value="KOYILANDY">KOYILANDY</option>
                                 <option value="PAYYOLI">PAYYOLI</option>
                                 <option value="PERAMBRA">PERAMBRA</option>
+                                <option value="KUTTIYADI">KUTTIYADI</option>
                             </select>
                         </div>
 
@@ -505,7 +506,7 @@
                     </div>
                     <div class="flex flex-col items-center md:items-start pt-6 md:pt-0 md:pl-8">
                         <span class="text-xs font-semibold uppercase tracking-wider text-magenta mb-1">Location</span>
-                        <p class="text-2xl font-serif font-bold text-maroon">Nadapuram</p>
+                        <p class="text-2xl font-serif font-bold text-maroon">Kuttiyadi</p>
                         <p class="text-lg text-maroon/80 font-medium">Kozhikode District, Kerala</p>
                     </div>
                     <div class="flex flex-col items-center md:items-start pt-6 md:pt-0 md:pl-8">
@@ -548,11 +549,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5 reveal-element">
                     <span class="text-magenta font-semibold text-xs sm:text-sm uppercase tracking-widest">Venue & Directions</span>
-                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-6">Gathering at Nadapuram</h2>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-maroon mt-2 mb-6">Gathering at Kuttiyadi</h2>
                     <p class="text-base text-maroon/80 leading-relaxed mb-6">
-                        Nadapuram is a historic town in Kozhikode district, well-connected by major roadways. The conference facility offers modern amenities, dedicated prayer areas, and an inspiring environment for all delegates.
+                        Kuttiyadi is a key landmark town in Kozhikode district, well-connected by major roadways. The conference facility offers modern amenities, dedicated prayer areas, and an inspiring environment for all delegates.
                     </p>
-                    <a href="https://maps.google.com/?q=Nadapuram+Kozhikode+Kerala" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold text-white bg-maroon hover:bg-magenta transition-all duration-300 shadow-md">
+                    <a href="https://maps.google.com/?q=Kuttiyadi+Kozhikode+Kerala" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold text-white bg-maroon hover:bg-magenta transition-all duration-300 shadow-md">
                         <i class="fa-solid fa-diamond-turn-right mr-2.5 text-mustard"></i>
                         View Location on Google Maps
                     </a>
@@ -564,7 +565,7 @@
                             <div class="w-20 h-20 rounded-full bg-magenta/10 border-2 border-magenta flex items-center justify-center mb-4 animate-bounce">
                                 <i class="fa-solid fa-location-dot text-3xl text-magenta"></i>
                             </div>
-                            <h3 class="text-2xl font-serif font-bold text-maroon">Nadapuram Conference Center</h3>
+                            <h3 class="text-2xl font-serif font-bold text-maroon">Kuttiyadi Conference Center</h3>
                             <p class="text-xs sm:text-sm text-maroon/70 mt-1 max-w-sm">
                                 Full address details and delegate hall mapping will be shared upon registration confirmation.
                             </p>
@@ -633,7 +634,7 @@
         // App Id context
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'vidyarthini-30d32';
 
-        // വാട്സ്ആപ്പ് വഴി ഓട്ടോ-സേവ് ചെയ്യപ്പെട്ട ഡോക്യുമെന്റിന്റെ ID ട്രാക്ക് ചെയ്യാൻ Variable
+        // Auto-save doc ID tracker
         let createdDocId = sessionStorage.getItem('createdDocId') || null;
 
         // Auth initialization
@@ -658,7 +659,8 @@
             "POONUR": ["THALAYAD", "THACHAMPOYIL", "VALLIYOTH", "EKAROOL", "POONOOR", "KEDAVOOR", "KOLIKKAL"],
             "KOYILANDY": ["KATTIL PEEDIKA", "KAPPAD", "CHANGOOTUKAVU", "KOYLANDI", "KOLLAM", "MUDADI", "ARIKKULAM", "KAVUMVATTAM"],
             "PAYYOLI": ["PAYYOLI", "THURAYUR", "THIKKODI", "NANDI", "KEEZHUR"],
-            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"]
+            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"],
+            "KUTTIYADI": ["KUTTIYADI TOWN", "KUTTIYADI", "VELOM", "KAVILUMPARA", "MARUTHONKARA", "KAYAKKODY"]
         };
 
         window.handleZoneChange = function() {
@@ -688,7 +690,7 @@
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
             
-            // ഫോമിൽ പേരും ഫോണും ഉണ്ടെങ്കിൽ തത്സമയം ബാക്ക്ഗ്രൗണ്ടിൽ ഫയർബേസിലേക്ക് സൂക്ഷിക്കുന്നു
+            // Auto-save to Firebase if name and phone are filled
             if (name !== '' && phone !== '' && !createdDocId) {
                 try {
                     if (!auth.currentUser) {
@@ -712,7 +714,6 @@
                         userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
                     });
 
-                    // ക്രിയേറ്റ് ചെയ്‌ത Doc ID സേവ് ആക്കിവെക്കുക
                     createdDocId = newDoc.id;
                     sessionStorage.setItem('createdDocId', createdDocId);
                     console.log("Data auto-saved on WhatsApp click with Doc ID:", createdDocId);
@@ -751,7 +752,6 @@
 
             const checkbox = document.getElementById('joinedConfirmCheckbox');
             if (!checkbox || !checkbox.checked) {
-                alert("Please click the link to join the WhatsApp group and confirm by checking the required box before submitting.");
                 return;
             }
 
@@ -782,22 +782,20 @@
                     mandalam,
                     unit,
                     whatsappJoined: true,
-                    autoSavedFromWhatsApp: false, // സമർപ്പണം പൂർത്തിയായി
+                    autoSavedFromWhatsApp: false,
                     registeredAt: serverTimestamp(),
                     userId: auth.currentUser ? auth.currentUser.uid : 'anonymous'
                 };
 
-                // നേരെത്തെ വാട്സ്ആപ്പ് അമർത്തിയപ്പോൾ ആ ഡാറ്റ സേവ് ആയിരുന്നെങ്കിൽ രണ്ടാമതൊരു എൻട്രി ഇല്ലാതെ അതിലേക്ക് Update ചെയ്യുന്നു.
                 if (createdDocId) {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'registrations', createdDocId);
                     await setDoc(docRef, payload, { merge: true });
                 } else {
-                    // അഥവാ ഓട്ടോ-സേവ് ആയിട്ടില്ലെങ്കിൽ പുതിയ എൻട്രിയായി സേവ് ചെയ്യും
                     const regCollection = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
                     await addDoc(regCollection, payload);
                 }
 
-                // Text-only confirmation message
+                // Text-only confirmation message updated with Kuttiyadi location
                 feedback.className = "mt-6 p-8 rounded-2xl text-center font-medium bg-emerald-50 text-emerald-950 border border-emerald-300 block shadow-sm";
                 feedback.innerHTML = `
                     <div class="flex flex-col items-center">
@@ -806,7 +804,7 @@
                         </div>
                         <h4 class="text-2xl font-bold font-serif mb-2 text-emerald-950">Registration Successfully Completed!</h4>
                         <p class="text-emerald-800 text-base max-w-lg leading-relaxed">
-                            Thank you, <strong>${name}</strong>. Your registration details have been verified and recorded. We look forward to welcoming you at Nadapuram!
+                            Thank you, <strong>${name}</strong>. Your registration details have been verified and recorded. We look forward to welcoming you at Kuttiyadi!
                         </p>
                         <div class="mt-4 pt-4 border-t border-emerald-200 text-xs text-emerald-700 font-semibold">
                             For any inquiries or assistance, please call: <strong>+91 73061 07430</strong>
