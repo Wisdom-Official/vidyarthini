@@ -1,10 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vidyarthini Sammelanam | Wisdom Girls Kozhikode North</title>
+    <meta name="description" content="Empowering Young Muslim Women with Knowledge, Identity, and Purpose. 23 Dec 2026 · Thursday at Kuttiyadi. Organized by Wisdom Girls Kozhikode North.">
+
+    <!-- Open Graph / WhatsApp / Social Media Link Preview Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Wisdom Girls Kozhikode North">
+    <meta property="og:title" content="Vidyarthini Sammelanam | Wisdom Girls Kozhikode North">
+    <meta property="og:description" content="Empowering Young Muslim Women with Knowledge, Identity, and Purpose. 23 Dec 2026 · Kuttiyadi.">
+    <meta property="og:image" content="Main logo.png">
+    <meta property="og:image:secure_url" content="Main logo.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Vidyarthini Sammelanam Event Logo">
+
+    <!-- Twitter Card Meta Tags (Also used as fallback by WhatsApp & Telegram) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vidyarthini Sammelanam | Wisdom Girls Kozhikode North">
+    <meta name="twitter:description" content="Empowering Young Muslim Women with Knowledge, Identity, and Purpose. 23 Dec 2026 · Kuttiyadi.">
+    <meta name="twitter:image" content="Main logo.png">
+
+    <!-- Favicon / App Icon -->
+    <link rel="icon" type="image/png" href="Main logo.png">
+    <link rel="apple-touch-icon" href="Main logo.png">
     
     <!-- Fonts: Playfair Display for Serifs, Plus Jakarta Sans for Body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -610,6 +630,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- DYNAMIC OPEN GRAPH URL RESOLVER FOR DEPLOYED DOMAINS -->
+    <script>
+        (function() {
+            try {
+                if (window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
+                    const absoluteLogoUrl = new URL('Main logo.png', window.location.href).href;
+                    const pageUrl = window.location.href;
+
+                    const ogImage = document.querySelector('meta[property="og:image"]');
+                    const ogSecureImage = document.querySelector('meta[property="og:image:secure_url"]');
+                    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+
+                    if (ogImage) ogImage.setAttribute('content', absoluteLogoUrl);
+                    if (ogSecureImage) ogSecureImage.setAttribute('content', absoluteLogoUrl);
+                    if (twitterImage) twitterImage.setAttribute('content', absoluteLogoUrl);
+
+                    let ogUrl = document.querySelector('meta[property="og:url"]');
+                    if (!ogUrl) {
+                        ogUrl = document.createElement('meta');
+                        ogUrl.setAttribute('property', 'og:url');
+                        document.head.appendChild(ogUrl);
+                    }
+                    ogUrl.setAttribute('content', pageUrl);
+                }
+            } catch (e) {
+                console.warn('OG URL resolution skipped:', e);
+            }
+        })();
+    </script>
 
     <!-- FIREBASE MODULE & SCRIPT -->
     <script type="module">
