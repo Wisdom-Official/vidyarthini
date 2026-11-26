@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,7 +134,7 @@
                 <div class="bg-white p-6 rounded-3xl border border-blushDark shadow-sm flex items-center justify-between">
                     <div>
                         <span class="text-xs font-bold uppercase text-maroon/60 tracking-wider">Active Mandalams</span>
-                        <p id="statZones" class="text-4xl font-serif font-bold text-maroon mt-1">7</p>
+                        <p id="statZones" class="text-4xl font-serif font-bold text-maroon mt-1">8</p>
                     </div>
                     <div class="w-14 h-14 rounded-2xl bg-olive/10 text-olive flex items-center justify-center text-2xl shadow-inner">
                         <i class="fa-solid fa-map-location-dot"></i>
@@ -145,7 +144,7 @@
                 <div class="bg-white p-6 rounded-3xl border border-blushDark shadow-sm flex items-center justify-between">
                     <div>
                         <span class="text-xs font-bold uppercase text-maroon/60 tracking-wider">Total Units</span>
-                        <p id="statUnits" class="text-4xl font-serif font-bold text-maroon mt-1">43</p>
+                        <p id="statUnits" class="text-4xl font-serif font-bold text-maroon mt-1">49</p>
                     </div>
                     <div class="w-14 h-14 rounded-2xl bg-mustard/10 text-mustard flex items-center justify-center text-2xl shadow-inner">
                         <i class="fa-solid fa-building-flag"></i>
@@ -162,7 +161,7 @@
                         <div>
                             <label class="block text-xs font-bold text-maroon/70 mb-1.5" for="dashMandalamFilter">Filter Zone / Mandalam</label>
                             <select id="dashMandalamFilter" onchange="filterDashboardData()" class="w-full px-4 py-2.5 rounded-xl border border-blushDark bg-cream text-maroon text-xs font-bold focus:ring-2 focus:ring-magenta focus:outline-none transition-all">
-                                <option value="ALL">All Mandalams (7 Zones)</option>
+                                <option value="ALL">All Mandalams (8 Zones)</option>
                                 <option value="VATAKARA">VATAKARA</option>
                                 <option value="BALUSSERRY">BALUSSERRY</option>
                                 <option value="NADAPURAM">NADAPURAM</option>
@@ -170,6 +169,7 @@
                                 <option value="KOYILANDY">KOYILANDY</option>
                                 <option value="PAYYOLI">PAYYOLI</option>
                                 <option value="PERAMBRA">PERAMBRA</option>
+                                <option value="KUTTIYADI">KUTTIYADI</option>
                             </select>
                         </div>
 
@@ -242,6 +242,9 @@
         </main>
     </div>
 
+    <!-- Custom Notification Toast for Admin Actions -->
+    <div id="adminToast" class="fixed bottom-5 right-5 z-50 hidden px-5 py-3.5 rounded-2xl bg-maroon text-white text-xs font-semibold shadow-xl border border-magenta/40 transition-all"></div>
+
     <!-- FIREBASE MODULE & LOGIC SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -269,10 +272,20 @@
             "POONUR": ["THALAYAD", "THACHAMPOYIL", "VALLIYOTH", "EKAROOL", "POONOOR", "KEDAVOOR", "KOLIKKAL"],
             "KOYILANDY": ["KATTIL PEEDIKA", "KAPPAD", "CHANGOOTUKAVU", "KOYLANDI", "KOLLAM", "MUDADI", "ARIKKULAM", "KAVUMVATTAM"],
             "PAYYOLI": ["PAYYOLI", "THURAYUR", "THIKKODI", "NANDI", "KEEZHUR"],
-            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"]
+            "PERAMBRA": ["PANTHIRIKKARA", "PERAMBRA", "ERAVATTOOR", "KADIYANGAD PALAM", "NOCHAD", "MEPPAYYUR", "EAST PERAMBRA"],
+            "KUTTIYADI": ["KUTTIYADI TOWN", "KUTTIYADI", "VELOM", "KAVILUMPARA", "MARUTHONKARA", "KAYAKKODY"]
         };
 
         let rawRegistrations = [];
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('adminToast');
+            toast.textContent = msg;
+            toast.className = `fixed bottom-5 right-5 z-50 px-5 py-3.5 rounded-2xl text-white text-xs font-semibold shadow-xl transition-all ${isError ? 'bg-rose-600' : 'bg-maroon border border-magenta/40'}`;
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
 
         async function initAuthAndData() {
             try {
@@ -289,9 +302,16 @@
                     snapshot.forEach(docSnap => {
                         rawRegistrations.push({ id: docSnap.id, ...docSnap.data() });
                     });
+                    // Sort newest first if registeredAt exists
+                    rawRegistrations.sort((a, b) => {
+                        const tA = a.registeredAt?.seconds || 0;
+                        const tB = b.registeredAt?.seconds || 0;
+                        return tB - tA;
+                    });
                     renderDashboard();
                 }, (error) => {
                     console.error("Firestore Listen Error:", error);
+                    showToast("Error syncing data with Firebase.", true);
                 });
 
             } catch (err) {
@@ -422,13 +442,15 @@
                     const snapshot = await getDocs(regCollection);
                     const deletePromises = snapshot.docs.map(d => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'registrations', d.id)));
                     await Promise.all(deletePromises);
+                    showToast("All registration records cleared.");
                 } else if (targetId) {
                     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'registrations', targetId));
+                    showToast("Delegate record deleted.");
                 }
                 closeDeleteModal();
             } catch (err) {
                 console.error("Delete operation failed:", err);
-                alert("Failed to delete record. Please check internet connection.");
+                showToast("Failed to delete record. Check internet connection.", true);
             }
         };
 
@@ -437,7 +459,7 @@
             const dataToExport = mode === 'filtered' ? (window.currentFilteredData || []) : rawRegistrations;
 
             if (dataToExport.length === 0) {
-                alert("No data available to export.");
+                showToast("No data available to export.", true);
                 return;
             }
 
@@ -461,6 +483,7 @@
             const fileName = mode === 'filtered' && zone !== 'ALL' ? `Vidyarthini_Delegates_${zone}.xlsx` : `Vidyarthini_Delegates_All.xlsx`;
 
             XLSX.writeFile(workbook, fileName);
+            showToast("Excel file downloaded successfully!");
         };
     </script>
 
