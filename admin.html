@@ -72,8 +72,11 @@
 
             <form id="deleteForm" class="space-y-4">
                 <input type="hidden" id="deleteTargetId" value="">
-                <div>
-                    <input type="password" id="deletePassInput" required placeholder="Type password: controller" class="w-full px-4 py-3 rounded-xl border border-rose-200 text-center text-maroon font-semibold focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                <div id="singlePassWrapper">
+                    <input type="password" id="deletePassInput" placeholder="Type password: controller" class="w-full px-4 py-3 rounded-xl border border-rose-200 text-center text-maroon font-semibold focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                </div>
+                <div id="masterPassWrapper" class="hidden">
+                    <textarea id="masterDeletePassInput" rows="3" placeholder="Enter Master Authorization Phrase..." class="w-full px-4 py-3 rounded-xl border border-rose-300 text-center text-maroon text-xs font-semibold focus:ring-2 focus:ring-rose-600 focus:outline-none resize-none"></textarea>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <button type="button" onclick="closeDeleteModal()" class="w-full py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold text-xs hover:bg-gray-50">
@@ -84,11 +87,11 @@
                     </button>
                 </div>
             </form>
-            <p id="deleteError" class="hidden text-xs text-rose-600 font-bold mt-3"><i class="fa-solid fa-circle-xmark mr-1"></i> Invalid security password!</p>
+            <p id="deleteError" class="hidden text-xs text-rose-600 font-bold mt-3"><i class="fa-solid fa-circle-xmark mr-1"></i> Invalid authorization! Deletion denied.</p>
         </div>
     </div>
 
-    <!-- 3. MANDALAM & UNIT DRILL-DOWN MODAL (NEW FEATURE) -->
+    <!-- 3. MANDALAM & UNIT DRILL-DOWN MODAL -->
     <div id="mandalamModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-4 md:p-6 bg-maroon/80 backdrop-blur-md">
         <div class="bg-cream w-full max-w-5xl max-h-[92vh] rounded-3xl shadow-2xl border border-blushDark flex flex-col overflow-hidden">
             
@@ -690,9 +693,15 @@
         const deleteModal = document.getElementById('deleteModal');
         const deleteForm = document.getElementById('deleteForm');
         const deletePassInput = document.getElementById('deletePassInput');
+        const masterDeletePassInput = document.getElementById('masterDeletePassInput');
+        const singlePassWrapper = document.getElementById('singlePassWrapper');
+        const masterPassWrapper = document.getElementById('masterPassWrapper');
         const deleteTargetId = document.getElementById('deleteTargetId');
         const deleteModalSubtitle = document.getElementById('deleteModalSubtitle');
         const deleteError = document.getElementById('deleteError');
+
+        // Secret two-sentence authorization phrase for Clear All Data (never displayed in UI)
+        const MASTER_CLEAR_PHRASE = "I hereby confirm and agree to permanently delete all registration data from this portal. I understand that this action is irreversible and cannot be undone.";
 
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -713,45 +722,74 @@
             passInput.value = '';
         }
 
+        function configureDeleteModalMode(isMasterClear) {
+            deleteError.classList.add('hidden');
+            deletePassInput.value = '';
+            masterDeletePassInput.value = '';
+
+            if (isMasterClear) {
+                singlePassWrapper.classList.add('hidden');
+                deletePassInput.required = false;
+                masterPassWrapper.classList.remove('hidden');
+                masterDeletePassInput.required = true;
+            } else {
+                masterPassWrapper.classList.add('hidden');
+                masterDeletePassInput.required = false;
+                singlePassWrapper.classList.remove('hidden');
+                deletePassInput.required = true;
+            }
+            deleteModal.classList.remove('hidden');
+        }
+
         function promptSingleDelete(id, name) {
             deleteTargetId.value = id;
             deleteModalSubtitle.innerHTML = `Deleting delegate <strong>"${name}"</strong>. Confirm with password <strong>controller</strong>.`;
-            deleteError.classList.add('hidden');
-            deletePassInput.value = '';
-            deleteModal.classList.remove('hidden');
+            configureDeleteModalMode(false);
         }
 
         function promptUnitDelete(zone, unit, count) {
             deleteTargetId.value = `UNIT::${zone}::${unit}`;
             deleteModalSubtitle.innerHTML = `<span class="text-rose-600 font-bold">Deleting all ${count} record(s) in unit "${unit}" (${zone})!</span> Enter password <strong>controller</strong> to authorize.`;
-            deleteError.classList.add('hidden');
-            deletePassInput.value = '';
-            deleteModal.classList.remove('hidden');
+            configureDeleteModalMode(false);
         }
 
         function promptDeleteAll() {
             deleteTargetId.value = 'ALL';
-            deleteModalSubtitle.innerHTML = `<span class="text-rose-600 font-bold">WARNING: Clear ALL delegate records!</span> Enter password <strong>controller</strong> to authorize.`;
-            deleteError.classList.add('hidden');
-            deletePassInput.value = '';
-            deleteModal.classList.remove('hidden');
+            deleteModalSubtitle.innerHTML = `<span class="text-rose-600 font-bold">CRITICAL ACTION: Clear ALL delegate records!</span><br>Enter the confidential authorization paragraph to proceed.`;
+            configureDeleteModalMode(true);
         }
 
         function closeDeleteModal() {
             deleteModal.classList.add('hidden');
             deletePassInput.value = '';
+            masterDeletePassInput.value = '';
         }
 
         deleteForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const pass = deletePassInput.value.trim();
-            if (pass.toLowerCase() === 'controller') {
-                const targetId = deleteTargetId.value;
-                if (window.executeDeleteAction) {
-                    window.executeDeleteAction(targetId);
+            const targetId = deleteTargetId.value;
+
+            if (targetId === 'ALL') {
+                // Normalize whitespace and compare case-insensitively
+                const normalizedInput = masterDeletePassInput.value.replace(/\s+/g, ' ').trim().toLowerCase();
+                const normalizedSecret = MASTER_CLEAR_PHRASE.replace(/\s+/g, ' ').trim().toLowerCase();
+
+                if (normalizedInput === normalizedSecret) {
+                    if (window.executeDeleteAction) {
+                        window.executeDeleteAction(targetId);
+                    }
+                } else {
+                    deleteError.classList.remove('hidden');
                 }
             } else {
-                deleteError.classList.remove('hidden');
+                const pass = deletePassInput.value.trim();
+                if (pass.toLowerCase() === 'controller') {
+                    if (window.executeDeleteAction) {
+                        window.executeDeleteAction(targetId);
+                    }
+                } else {
+                    deleteError.classList.remove('hidden');
+                }
             }
         });
     </script>
